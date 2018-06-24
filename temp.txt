@@ -1,7 +1,13 @@
 START
 1,901
-2,3,var1
-3,5,var1
-4,902
-5,0
+2,3,first
+3,901
+4,3,second
+5,2,first
+6,8,08
+7,5,first
+8,6,done
+9,5,second
+10,#902, done
+11,0
 END
