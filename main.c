@@ -22,14 +22,12 @@ int main()
         fgets(newLine, 25, stdin);
         lineNum++;
         fileLineNum++;
-        printf("%s\n", "1.before checkLine");
         bool doNewLine = checkLine(newLine);
         if(!doNewLine){
             fileLineNum--;
         }
         if(doNewLine == true){
             int len = sizeof(newLine)/sizeof(newLine[0]);
-            printf("%s\n", "3.before addNewLine");
             addNewLine(newLine, fileLineNum, len);
         }
     } while (strcmp(newLine, "HLT\n") != 0);
@@ -38,20 +36,16 @@ int main()
 }
 
 bool checkLine(char *newLine){
-    char instruction[3] = {80,80,80};
-    printf("2. started checkLine");
+    char instruction[4] = {80,80,80,'\0'};
     for(int i = 0; i < 3; i++){
         instruction[i] = newLine[i];
     }
-    printf("3.%s", instruction);
     if(strcmp(instruction, "LDA") == 0){
         instructnum = 5;
-        //free(instruction);
         return true;
     }
     if(strcmp(instruction, "STA") == 0){
         instructnum = 3;
-        //free(instruction);
         return true;
     }
     if(strcmp(instruction, "ADD") == 0){
@@ -86,23 +80,24 @@ bool checkLine(char *newLine){
         instructnum = 0;
         return true;
     }
-    //free(instruction);
     return false;
 }
 
 void addNewLine(char newLine[], int lineNum, int len){
-    char operand[16];
-    printf("4. made to addNewLine");
+    char operand[21];
     if(len > 4){
         for(int i = 4; i < len; i++){
             operand[i - 4] = newLine[i];
         }
-        printf("%s\n", newLine);
-        printf("operand: %s\n", operand);
     }
     FILE *tempFile;
     tempFile = fopen("temp.txt", "a");
-    fprintf(tempFile, "%d,%d,%s", lineNum - 1, instructnum, operand);
+    if(operand[0] != 0){
+        fprintf(tempFile, "%d,%d,%s", lineNum - 1, instructnum, operand);
+    }
+    if(operand[0] == 0){
+        fprintf(tempFile, "%d,%d\n", lineNum - 1, instructnum);
+    }
     fclose(tempFile);
 }
 
