@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1529808635 source:c:\users\mr sheepington\documents\_c scripts\clmc\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1529798089 source:c:\users\mr sheepington\documents\_c scripts\clmc\testpointers.c
+	<stdlib.h>
+	<stdio.h>
+
+1529857167 source:c:\users\mr sheepington\documents\_c scripts\clmce\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+

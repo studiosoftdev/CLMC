@@ -1,12 +1,1 @@
 START
-1,INP
-2,STA first
-3,INP
-4,ADD first
-5,OUT
-6,INP
-7,SUB first
-8,OUT
-9,HLT
-10,first DAT
-11,END
