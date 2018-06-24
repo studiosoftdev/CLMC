@@ -29,7 +29,7 @@ int main()
         }
         if(doNewLine == true){
             int len = sizeof(newLine)/sizeof(newLine[0]);
-            printf("%s\n", "4.before addNewLine");
+            printf("%s\n", "3.before addNewLine");
             addNewLine(newLine, fileLineNum, len);
         }
     } while (strcmp(newLine, "HLT\n") != 0);
@@ -38,26 +38,20 @@ int main()
 }
 
 bool checkLine(char *newLine){
-    char *instruction;
-    printf("2.%s\n", newLine);
-    instruction = (char*) calloc(4, sizeof(int));
-    if(instruction == NULL){
-        printf("ERROR FAILURE TO ALLOCATE MEMEORY");
-        exit(1);
-    }
+    char instruction[3] = {80,80,80};
+    printf("2. started checkLine");
     for(int i = 0; i < 3; i++){
         instruction[i] = newLine[i];
     }
     printf("3.%s", instruction);
-    instruction[3] = '\0';
     if(strcmp(instruction, "LDA") == 0){
         instructnum = 5;
-        free(instruction);
+        //free(instruction);
         return true;
     }
     if(strcmp(instruction, "STA") == 0){
         instructnum = 3;
-        free(instruction);
+        //free(instruction);
         return true;
     }
     if(strcmp(instruction, "ADD") == 0){
@@ -92,23 +86,23 @@ bool checkLine(char *newLine){
         instructnum = 0;
         return true;
     }
-    free(instruction);
+    //free(instruction);
     return false;
 }
 
 void addNewLine(char newLine[], int lineNum, int len){
-    int *operand = (int*) malloc (17);
-    printf("%s", newLine);
+    char operand[16];
+    printf("4. made to addNewLine");
     if(len > 4){
         for(int i = 4; i < len; i++){
             operand[i - 4] = newLine[i];
         }
         printf("%s\n", newLine);
-        printf("%s\n", operand);
+        printf("operand: %s\n", operand);
     }
     FILE *tempFile;
     tempFile = fopen("temp.txt", "a");
-    fprintf(tempFile, "%d,%s", lineNum - 1, newLine);
+    fprintf(tempFile, "%d,%d,%s", lineNum - 1, instructnum, operand);
     fclose(tempFile);
 }
 
